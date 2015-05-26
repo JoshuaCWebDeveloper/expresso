@@ -43,7 +43,7 @@ def text2HDF5(name,sourceloc,destfolderloc,hasLabel=False,dimx=227,dimy=227,dimz
 	    print d.strip().split(),'iiiiiiiiii'
 	    hasLabel= True if len(d.strip().split())>1 else False
 	    #Check If It has Label ends
-            x = cv2.imresize(np.array(skiToCvOrViceVersa(cv2.imread(folderloc+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
+            x = cv2.resize(np.array(skiToCvOrViceVersa(cv2.imread(folderloc+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
             #x=scipy.misc.imresize(np.array(Image.open(folderloc+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
             dset[idx-1,]=x.reshape(1,dimz,dimx,dimy)
             print x.shape
@@ -65,7 +65,8 @@ def folder2HDF5(name,sourceloc,destfolderloc,hasLabel=False,dimx=227,dimy=227,di
             print d
             try:
                 #x=scipy.misc.imresize(np.array(Image.open(str(sourceloc)+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
-                x = cv2.imresize(np.array(skiToCvOrViceVersa(cv2.imread(str(sourceloc)+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
+                x = cv2.resize(np.array(skiToCvOrViceVersa(cv2.imread(str(sourceloc)+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
+                #print x, "";
                 dset[idx]=x.reshape(1,dimz,dimx,dimy)
             except Exception as e:
                 print e.__doc__
