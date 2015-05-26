@@ -1,4 +1,8 @@
+---Forked to change some scipy functions to opencv functions. Does not use PIL anymore.
+
+
 # Expresso
+
 
 Expresso is a Python-based GUI for designing, training and exploring deep-learning frameworks. It is built atop [Caffe](http://caffe.berkeleyvision.org), the open-source, prize-winning software popularly used to develop Convolutional Neural Networks.
 
