@@ -7,8 +7,19 @@ import scipy.io as sio
 import readdb
 import os
 import shutil
+import sys
+import cv2
 #import leveldB
 root=os.getenv('EXPRESSO_ROOT')
+
+#Utils
+def skiToCvOrViceVersa(ip_image):
+    """Convert from Ski-Image format to Opencv format RGB->BGR and Vice Versa. Alpha Channel Unaffected"""
+    rearranged = np.zeros_like(ip_image)
+    rearranged[:,:,0] = ip_image[:,:,2]
+    rearranged[:,:,1] = ip_image[:,:,1]
+    rearranged[:,:,2] = ip_image[:,:,0]
+    return rearranged
 
 def text2HDF5(name,sourceloc,destfolderloc,hasLabel=False,dimx=227,dimy=227,dimz=3):
     f=h5py.File(destfolderloc+'/'+name+'.hdf5','w')
@@ -32,7 +43,8 @@ def text2HDF5(name,sourceloc,destfolderloc,hasLabel=False,dimx=227,dimy=227,dimz
 	    print d.strip().split(),'iiiiiiiiii'
 	    hasLabel= True if len(d.strip().split())>1 else False
 	    #Check If It has Label ends
-            x=scipy.misc.imresize(np.array(Image.open(folderloc+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
+            x = cv2.imresize(np.array(skiToCvOrViceVersa(cv2.imread(folderloc+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
+            #x=scipy.misc.imresize(np.array(Image.open(folderloc+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
             dset[idx-1,]=x.reshape(1,dimz,dimx,dimy)
             print x.shape
 
@@ -51,9 +63,15 @@ def folder2HDF5(name,sourceloc,destfolderloc,hasLabel=False,dimx=227,dimy=227,di
         if(len(d.strip())>1 and len(d.split("."))>0 and  d.split(".")[-1] in ['jpg','png','gif','bmp','tiff','jpeg']):
 
             print d
-            x=scipy.misc.imresize(np.array(Image.open(str(sourceloc)+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
+            try:
+                #x=scipy.misc.imresize(np.array(Image.open(str(sourceloc)+'/'+d.strip().split()[0]),dtype='float32'),[dimx,dimy]).transpose([2,0,1])
+                x = cv2.imresize(np.array(skiToCvOrViceVersa(cv2.imread(str(sourceloc)+'/'+d.strip().split()[0])), dtype='float32'), (dimx,dimy)).transpose([2,0,1])
+                dset[idx]=x.reshape(1,dimz,dimx,dimy)
+            except Exception as e:
+                print e.__doc__
+                print e.message
 	
-            dset[idx]=x.reshape(1,dimz,dimx,dimy)
+            
 
     f.close();
     pass

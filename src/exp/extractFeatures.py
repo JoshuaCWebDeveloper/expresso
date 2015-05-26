@@ -10,7 +10,7 @@ sys.path.append(caffe_root+'/python')
 sys.path.append(caffe_root+'/python/caffe/proto')
 import netConfig_pb2
 import caffe
-import caffe_pb2
+from caffe.proto import caffe_pb2
 import numpy as np
 import h5py
 import scipy
