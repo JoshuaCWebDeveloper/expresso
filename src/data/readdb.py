@@ -7,7 +7,7 @@ sys.path.append(caffe_root+'/python/caffe/proto')
 sys.path.append(caffe_root+'/python/caffe')
 sys.path.append(caffe_root+'/python')
 import caffe
-import caffe_pb2
+from caffe.proto import caffe_pb2
 import h5py
 
 

@@ -18,7 +18,7 @@ import sys
 
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python/caffe/proto')
 from google.protobuf import text_format
-import caffe_pb2
+from caffe.proto import caffe_pb2
 
 sys.path.append(root+'/src/net/config')
 import netConfig_pb2

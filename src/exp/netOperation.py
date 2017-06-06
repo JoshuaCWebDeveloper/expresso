@@ -14,7 +14,7 @@ import netConfig_pb2
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python/caffe/proto')
 from google.protobuf import text_format
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python')
-import caffe_pb2
+from caffe.proto import caffe_pb2
 import caffe
 import shutil
 import h5py

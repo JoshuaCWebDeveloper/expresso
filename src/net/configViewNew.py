@@ -18,7 +18,7 @@ import netWidget
 import configViewItem
 import otherParametersView
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python/caffe/proto')
-import caffe_pb2
+from caffe.proto import caffe_pb2
 sys.path.append(root+'/src/net/config')
 import netConfig_pb2
 from google.protobuf import text_format

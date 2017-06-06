@@ -5,7 +5,7 @@ from google.protobuf import text_format
 import inspect
 
 sys.path.append(os.getenv('HOME')+'/caffe/python/caffe/proto')
-import caffe_pb2
+from caffe.proto import caffe_pb2
 import google.protobuf.descriptor as desc
 
 

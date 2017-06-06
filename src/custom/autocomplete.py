@@ -4,7 +4,7 @@ import sys
 import os
 root=os.getenv('EXPRESSO_ROOT')
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python/caffe/proto')
-import caffe_pb2
+from caffe.proto import caffe_pb2
 from google.protobuf import text_format
 #from google.protobuf.descriptor import fielddescriptor
 import inspect

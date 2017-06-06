@@ -17,7 +17,7 @@ sys.path.append(root+'/src/net/config')
 
 
 sys.path.append(os.getenv('CAFFE_ROOT')+'/python/caffe/proto')
-import caffe_pb2
+from caffe.proto import caffe_pb2
 
 
 import netConfig_pb2

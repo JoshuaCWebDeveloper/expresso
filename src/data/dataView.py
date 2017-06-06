@@ -196,6 +196,7 @@ class Ui_Form(QtGui.QWidget):
                 #Add to the table
                 print files
                 j=self.tableWidgetData.rowCount();
+                #print "Files being accessed : ",self.root+'/data/'+files
                 f=h5py.File(self.root+'/data/'+files,'r')
 		if('data' not in f.keys()):continue
                 shape= f['data'].shape
@@ -233,6 +234,7 @@ class Ui_Form(QtGui.QWidget):
 		    self.tableWidgetData.item(j,3).setBackground(QtGui.QColor(165,180,150))
 	    	    self.refreshContext=True
 		    self.tableWidgetData.item(j,4).setBackground(QtGui.QColor(165,180,150))
+	    	#f.close();
 			    
     def tableWidgetSlot(self,position):
         menu =QtGui.QMenu()
